@@ -1,6 +1,6 @@
 {
   "name": "textbase.js",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "This is the NPM package for Textbases' API. Kinda cool, no?",
   "main": "dist/app.js",
   "scripts": {
