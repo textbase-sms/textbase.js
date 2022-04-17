@@ -26,6 +26,7 @@ const sms = (key, opts, operation) => __awaiter(void 0, void 0, void 0, function
     }
     ;
     (0, axios_1.default)({
+        method: 'post',
         url: 'https://ts.textbase.us/v1/sms',
         params: {
             token: key,
