@@ -6,6 +6,8 @@ const sms = async(key:BasicType, opts:any, operation?:BasicType) => {
     const op = operation || undefined // Unused parameter for now
     let url; // Unused parameter as its a descendent from op ^
 
+    let res;
+
     if(!key || !opts) {
         throw new Error('[PARAMETERS_ERROR] Need to fill all parameters')
     };
@@ -13,20 +15,21 @@ const sms = async(key:BasicType, opts:any, operation?:BasicType) => {
         throw new Error('[PARAMETERS_ERROR] Need to fill all options')
     };
 
-    axios({
-        method: 'post',
-        url: 'https://ts.textbase.us/v1/sms',
+    await axios({
+        method: 'get',
+        url: 'https://ts.textbase.us/v1/sms/',
         data: {
             'token': key,
             'to': opts.to,
             'message': opts.message
         }
     }).then((d) => {
-        console.log(d)
-        return d
+        res = d;
     }).catch((e) => {
         throw new Error('[REQUEST] An error occured during request \n'+e)
-    })
+    });
+
+    return res;
 }
 
 module.exports = {
