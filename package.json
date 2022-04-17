@@ -1,0 +1,25 @@
+{
+  "name": "textbase.js",
+  "version": "1.0.0",
+  "description": "This is the NPM package for Textbases' API. Kinda cool, no?",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/textbase-sms/textbase.js.git"
+  },
+  "keywords": [
+    "textbase",
+    "textbase",
+    "api",
+    "textbase.js"
+  ],
+  "author": "calll <callum@textbase.us> (https://textbase.us)",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/textbase-sms/textbase.js/issues"
+  },
+  "homepage": "https://github.com/textbase-sms/textbase.js#readme"
+}
