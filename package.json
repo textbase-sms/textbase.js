@@ -1,13 +1,12 @@
 {
   "name": "textbase.js",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "This is the NPM package for Textbases' API. Kinda cool, no?",
   "main": "dist/app.js",
   "scripts": {
     "build": "tsc --build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/textbase-sms/textbase.js.git"
