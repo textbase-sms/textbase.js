@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // Putting everything in here because I'm physically too lazy to just seperate it into modules for now.
 const axios_1 = __importDefault(require("axios"));
+const form_data_1 = __importDefault(require("form-data"));
 const sms = (key, opts, operation) => __awaiter(void 0, void 0, void 0, function* () {
     const op = operation || undefined; // Unused parameter for now
     let url; // Unused parameter as its a descendent from op ^
@@ -25,14 +26,14 @@ const sms = (key, opts, operation) => __awaiter(void 0, void 0, void 0, function
         throw new Error('[PARAMETERS_ERROR] Need to fill all options');
     }
     ;
+    const data = new form_data_1.default();
+    data.append('token', key);
+    data.append('to', opts.to);
+    data.append('message', opts.message);
     (0, axios_1.default)({
         method: 'post',
         url: 'https://ts.textbase.us/v1/sms',
-        params: {
-            token: key,
-            to: opts.to,
-            message: opts.message
-        }
+        data: data
     }).then((d) => {
         return d;
     }).catch((e) => {
