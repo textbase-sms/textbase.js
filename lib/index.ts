@@ -16,7 +16,7 @@ const sms = async(key:BasicType, opts:any, operation?:BasicType) => {
     };
 
     await axios({
-        method: 'get',
+        method: 'post',
         url: 'https://ts.textbase.us/v1/sms/',
         data: {
             'token': key,
