@@ -17,28 +17,36 @@ const axios_1 = __importDefault(require("axios"));
 const sms = (key, opts, operation) => __awaiter(void 0, void 0, void 0, function* () {
     const op = operation || undefined; // Unused parameter for now
     let url; // Unused parameter as its a descendent from op ^
+    let res;
     if (!key || !opts) {
-        throw new Error('[PARAMETERS_ERROR] Need to fill all parameters');
+        throw '[PARAMETERS_ERROR] Need to fill all parameters';
     }
     ;
     if (!opts.to || !opts.message && op != 'retrieve') {
-        throw new Error('[PARAMETERS_ERROR] Need to fill all options');
+        throw '[PARAMETERS_ERROR] Need to fill all options';
     }
     ;
-    (0, axios_1.default)({
-        method: 'post',
-        url: 'https://ts.textbase.us/v1/sms',
+    yield (0, axios_1.default)({
+        method: 'get',
+        url: 'https://ts.textbase.us/v1/sms/',
         data: {
             'token': key,
             'to': opts.to,
             'message': opts.message
         }
     }).then((d) => {
-        console.log(d);
-        return d;
+        res = d;
     }).catch((e) => {
-        throw new Error('[REQUEST] An error occured during request \n' + e);
+        if (e.response.status == 401) {
+            if (e.data.message == "Your token has been blocked. Contact support.") {
+                throw '[TOKEN_BLOCKED] Your token has been blocked. Contact support.';
+            }
+            else if (e.data.message == "Invalid API Token") {
+                throw '[TOKEN_INVALID] Your token is invalid.';
+            }
+        }
     });
+    return res;
 });
 module.exports = {
     sms
