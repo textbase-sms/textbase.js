@@ -9,10 +9,10 @@ const sms = async(key:BasicType, opts:any, operation?:BasicType) => {
     let res;
 
     if(!key || !opts) {
-        throw new Error('[PARAMETERS_ERROR] Need to fill all parameters')
+        throw '[PARAMETERS_ERROR] Need to fill all parameters'
     };
     if(!opts.to || !opts.message && op != 'retrieve') {
-        throw new Error('[PARAMETERS_ERROR] Need to fill all options')
+        throw '[PARAMETERS_ERROR] Need to fill all options'
     };
 
     await axios({
@@ -26,7 +26,13 @@ const sms = async(key:BasicType, opts:any, operation?:BasicType) => {
     }).then((d) => {
         res = d;
     }).catch((e) => {
-        throw new Error('[REQUEST] An error occured during request \n'+e)
+        if(e.response.status == 401) {
+            if(e.data.message == "Your token has been blocked. Contact support.") {
+                throw '[TOKEN_BLOCKED] Your token has been blocked. Contact support.'
+            } else if(e.data.message == "Invalid API Token") {
+                throw '[TOKEN_INVALID] Your token is invalid.'
+            }
+        }
     });
 
     return res;
