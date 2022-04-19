@@ -19,11 +19,11 @@ const sms = (key, opts, operation) => __awaiter(void 0, void 0, void 0, function
     let url; // Unused parameter as its a descendent from op ^
     let res;
     if (!key || !opts) {
-        throw '[PARAMETERS_ERROR] Need to fill all parameters';
+        throw new Error('[PARAMETERS_ERROR] Need to fill all parameters');
     }
     ;
     if (!opts.to || !opts.message && op != 'retrieve') {
-        throw '[PARAMETERS_ERROR] Need to fill all options';
+        throw new Error('[PARAMETERS_ERROR] Need to fill all options');
     }
     ;
     yield (0, axios_1.default)({
@@ -37,14 +37,7 @@ const sms = (key, opts, operation) => __awaiter(void 0, void 0, void 0, function
     }).then((d) => {
         res = d;
     }).catch((e) => {
-        if (e.response.status == 401) {
-            if (e.data.message == "Your token has been blocked. Contact support.") {
-                throw '[TOKEN_BLOCKED] Your token has been blocked. Contact support.';
-            }
-            else if (e.data.message == "Invalid API Token") {
-                throw '[TOKEN_INVALID] Your token is invalid.';
-            }
-        }
+        throw new Error('[REQUEST] An error occured during request \n' + e);
     });
     return res;
 });
